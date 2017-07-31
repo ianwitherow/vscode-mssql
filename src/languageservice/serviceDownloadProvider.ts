@@ -33,7 +33,7 @@ export default class ServiceDownloadProvider {
     */
     public getDownloadFileName(platform: Runtime): string {
         let fileNamesJson = this._config.getSqlToolsConfigValue('downloadFileNames');
-        let fileName = fileNamesJson[platform.toString()];
+        let fileName = fileNamesJson['Ubuntu_16'];
 
         if (fileName === undefined) {
             if (process.platform === 'linux') {

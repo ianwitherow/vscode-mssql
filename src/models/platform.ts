@@ -14,8 +14,8 @@ const plist = require('plist');
 const unknown = 'unknown';
 
 export enum Runtime {
-    UnknownRuntime = <any>'Unknown',
-    UnknownVersion = <any>'Unknown',
+    UnknownRuntime = <any>'Ubuntu_16',
+    UnknownVersion = <any>'Ubuntu_16',
     Windows_7_86 = <any>'Windows_7_86',
     Windows_7_64 = <any>'Windows_7_64',
     OSX_10_11_64 = <any> 'OSX_10_11_64',
@@ -54,7 +54,8 @@ export function getRuntimeDisplayName(runtime: Runtime): string {
         case Runtime.Ubuntu_16:
             return 'Ubuntu16';
         default:
-        return 'Unknown';
+            return 'Ubuntu16';
+				// return 'Unknown';
     }
 }
 
@@ -85,7 +86,8 @@ export class PlatformInformation {
     }
 
     public isValidRuntime(): boolean {
-        return this.runtimeId !== undefined && this.runtimeId !== Runtime.UnknownRuntime && this.runtimeId !== Runtime.UnknownVersion;
+        return true;
+        // return this.runtimeId !== undefined && this.runtimeId !== Runtime.UnknownRuntime && this.runtimeId !== Runtime.UnknownVersion;
     }
 
     public getRuntimeDisplayName(): string {
@@ -150,7 +152,9 @@ export class PlatformInformation {
                 break;
 
             default:
-                throw new Error(`Unsupported platform: ${platform}`);
+                architecturePromise = PlatformInformation.GetUnixArchitecture();
+                distributionPromise = LinuxDistribution.GetCurrent();
+                break;
         }
 
         return architecturePromise.then( arch => {
@@ -259,62 +263,7 @@ export class PlatformInformation {
     }
 
     private static getRuntimeIdHelper(distributionName: string, distributionVersion: string): Runtime {
-        switch (distributionName) {
-            case 'arch':
-                // NOTE: currently Arch Linux seems to be compatible enough with Ubuntu 16 that this works,
-                // though in the future this may need to change as Arch follows a rolling release model.
-                return Runtime.Ubuntu_16;
-            case 'ubuntu':
-                if (distributionVersion.startsWith('14')) {
-                    // This also works for Linux Mint
-                    return Runtime.Ubuntu_14;
-                } else if (distributionVersion.startsWith('16')) {
-                    return Runtime.Ubuntu_16;
-                }
-
-                break;
-            case 'elementary':
-            case 'elementary OS':
-                if (distributionVersion.startsWith('0.3')) {
-                    // Elementary OS 0.3 Freya is binary compatible with Ubuntu 14.04
-                    return Runtime.Ubuntu_14;
-                } else if (distributionVersion.startsWith('0.4')) {
-                    // Elementary OS 0.4 Loki is binary compatible with Ubuntu 16.04
-                    return Runtime.Ubuntu_16;
-                }
-
-                break;
-            case 'linuxmint':
-                if (distributionVersion.startsWith('18')) {
-                    // Linux Mint 18 is binary compatible with Ubuntu 16.04
-                    return Runtime.Ubuntu_16;
-                }
-
-                break;
-            case 'centos':
-            case 'ol':
-                // Oracle Linux is binary compatible with CentOS
-                return Runtime.CentOS_7;
-            case 'fedora':
-                return Runtime.Fedora_23;
-            case 'opensuse':
-                return Runtime.OpenSUSE_13_2;
-            case 'sles':
-                return Runtime.SLES_12_2;
-            case 'rhel':
-                return Runtime.RHEL_7;
-            case 'debian':
-                return Runtime.Debian_8;
-            case 'galliumos':
-                if (distributionVersion.startsWith('2.0')) {
-                    return Runtime.Ubuntu_16;
-                }
-                break;
-            default:
-                return Runtime.UnknownRuntime;
-        }
-
-        return Runtime.UnknownVersion;
+        return Runtime.Ubuntu_16;
     }
 }
 

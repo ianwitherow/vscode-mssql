@@ -8,7 +8,6 @@ packages
 *.log
 *.nupkg
 *.orig
-*.vsix
 *BROWSE.VC*
 tools
 examples

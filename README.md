@@ -1,3 +1,7 @@
+This fork contains a few config changes so that it works on **Solus**. Pretty much just made it think it's on Ubuntu 16.
+
+Just grab the [.vsix](https://github.com/ianwitherow/vscode-mssql/blob/master/mssql-1.1.0.vsix) file and side-load it, or clone and build yourself.
+
 [![Travis CI](https://travis-ci.org/Microsoft/vscode-mssql.svg?branch=master)](https://travis-ci.org/Microsoft/vscode-mssql)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/Microsoft/vscode-mssql?svg=true&retina=true&branch=master)](https://ci.appveyor.com/project/kburtram/vscode-mssql)
 [![Coverage Status](https://coveralls.io/repos/github/Microsoft/vscode-mssql/badge.svg?branch=master)](https://coveralls.io/github/Microsoft/vscode-mssql?branch=master)
